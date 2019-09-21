@@ -15,15 +15,18 @@ public class InputInterpreter {
 
     public String answerThrower(){
         long ans =0;
-
+        Operators opt =new Operators();
         if ("add".equals(this.operator)) {
-            ans = Operators.add(this.number1,this.number2);
+            ans = opt.add(this.number1,this.number2);
         } else if ("sub".equals(this.operator)) {
-            ans = Operators.subtract(this.number1,this.number2);
+            ans = opt.subtract(this.number1,this.number2);
         } else if("mul".equals(this.operator)) {
-            ans = Operators.multiply(this.number1,this.number2);
+            if (this.number2 == 0){
+                return "divide by zero error";
+            }
+            ans = opt.multiply(this.number1,this.number2);
         } else if("div".equals(this.operator)) {
-            ans = Operators.divide(this.number1,this.number2);
+            ans = opt.divide(this.number1,this.number2);
         } else {
             System.err.println("Internal error");
             System.exit(1);
