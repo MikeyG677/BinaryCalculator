@@ -7,6 +7,10 @@ public class CalculatorFace extends Application{
 
 
     public void start(Stage stage) throws Exception {
+        
+    }
 
+    public static void main(String[] args){
+        launch(args);
     }
 }
