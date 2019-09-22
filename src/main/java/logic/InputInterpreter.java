@@ -20,18 +20,21 @@ public class InputInterpreter {
             ans = opt.add(this.number1,this.number2);
         } else if ("sub".equals(this.operator)) {
             ans = opt.subtract(this.number1,this.number2);
-        } else if("mul".equals(this.operator)) {
-            if (this.number2 == 0){
-                return "divide by zero error";
-            }
-            ans = opt.multiply(this.number1,this.number2);
         } else if("div".equals(this.operator)) {
-            ans = opt.divide(this.number1,this.number2);
+            if (this.number2 == 0){
+                throw new ArithmeticException("trying to divide by zero");
+            }else {
+                ans = opt.divide(this.number1, this.number2);
+            }
+        } else if("mul".equals(this.operator)) {
+            ans = opt.multiply(this.number1,this.number2);
         } else {
             System.err.println("Internal error");
-            System.exit(1);
+            if(operator == null){
+                throw new NullPointerException("no operator");
+            }
+            throw new IllegalArgumentException(operator+" is an invalid operator");
         }
-
         return Long.toBinaryString(ans);
     }
 
@@ -50,8 +53,7 @@ public class InputInterpreter {
         } else if("sqrt".equals(operand)){
             this.operator = operand;
         }else{
-            System.err.println("Internal error");
-            System.exit(1);
+            throw new IllegalArgumentException(operand+" is an invalid operator");
         }
     }
 
