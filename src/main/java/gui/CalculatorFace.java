@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 public class CalculatorFace extends Application{
 
 
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage)throws Exception{
         
     }
 
