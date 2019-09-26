@@ -2,19 +2,27 @@ package logic;
 
 public class InputInterpreter {
 
-    private long number1 =0,number2 =0;
+    private int number1 =0,number2 =0;
     private String operator =null;
 
-    public void number1Catch(String number1){
-        this.number1 = Long.parseLong(number1, 2);
+    public String number1Catch(String number1){
+        if(number1 == " "|| number1 == null){
+            throw new NumberFormatException("enter a number");
+        }
+        this.number1 = Integer.parseInt(number1, 2);
+        return "";
     }
 
-    public void number2Catch(String number2){
-        this.number2 = Long.parseLong(number2,2);
+    public String number2Catch(String number2){
+        if(number2 == " "|| number2 == null){
+            throw new NumberFormatException("enter a number");
+        }
+        this.number2 = Integer.parseInt(number2,2);
+        return " ";
     }
 
     public String answerThrower(){
-        long ans =0;
+        int ans =0;
         Operators opt =new Operators();
         if ("add".equals(this.operator)) {
             ans = opt.add(this.number1,this.number2);
@@ -28,14 +36,19 @@ public class InputInterpreter {
             }
         } else if("mul".equals(this.operator)) {
             ans = opt.multiply(this.number1,this.number2);
-        } else {
+        } else if("sqrt".equals(this.operator)) {
+            ans = (int) opt.squareRoot(this.number1);
+        }else if("sqr".equals(this.operator)) {
+            ans = opt.square(this.number1);
+        }else{
             System.err.println("Internal error");
             if(operator == null){
                 throw new NullPointerException("no operator");
             }
             throw new IllegalArgumentException(operator+" is an invalid operator");
         }
-        return Long.toBinaryString(ans);
+        this.number1 = ans;
+        return Integer.toBinaryString(ans);
     }
 
     public void operandCatch(String operand){
@@ -48,7 +61,7 @@ public class InputInterpreter {
             this.operator = operand;
         } else if("div".equals(operand)){
             this.operator = operand;
-        } else if("pow".equals(operand)){
+        } else if("sqr".equals(operand)){
             this.operator = operand;
         } else if("sqrt".equals(operand)){
             this.operator = operand;

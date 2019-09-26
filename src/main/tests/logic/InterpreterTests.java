@@ -15,7 +15,7 @@ public class InterpreterTests {
         input.number2Catch("1000110");
         input.operandCatch("add");
         String ans = input.answerThrower();
-        Assert.assertNotNull("it isnt",ans);
+        Assert.assertEquals("111011110",ans);
     }
     
     @Test(expected = NullPointerException.class)

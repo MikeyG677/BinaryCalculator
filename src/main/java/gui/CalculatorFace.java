@@ -1,114 +1,180 @@
 package gui;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
+import logic.InputInterpreter;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
+public class CalculatorFace{
 
-public class CalculatorFace extends Application
-{
+    private BorderLayout layout = new BorderLayout();
+    private JPanel mainPanel = new JPanel(layout), verticalTop = new JPanel(new BorderLayout());
+    private Box horizontalFunctionTop = Box.createHorizontalBox(),
+            functionSide = Box.createVerticalBox(), numPanelLayout = Box.createHorizontalBox();
+    private JButton add = new JButton("+"), sub = new JButton("-"), div = new JButton("/"), mul = new JButton("X"),
+            sqr = new JButton("^2"), sqrt = new JButton("^.5"), one = new JButton("1"), zero = new JButton("0"),
+            equ = new JButton("="), clr = new JButton("clr");
+    private JTextArea topDisplay = new JTextArea(1,12), bottomDisplay = new JTextArea(1,12);
+    private JFrame frame = new JFrame("Binary Calculator");
+    private int buttonWidth = frame.getWidth()/3, heightButton = frame.getHeight()/6;
+    private InputInterpreter input = new InputInterpreter();
+    private boolean isItEquated = false;
 
-
-    @Override
-    public void start(Stage stage)
-    {
-        Button add = new Button(),sub, divide,multiple,square, squareRoot,one,zero,clear,equal;
-        TextArea Text;
-        Pane pane;
-        stage.setTitle("BinaryCalculator");
-        pane = new Pane();
-        /*add.setOnAction(new EventHandler<ActionEvent>(){
-            public void handle(ActionEvent actionEvent){
-
+    private void setUpButtonCompunets() {
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                input.number1Catch(bottomDisplay.getText());
+                input.operandCatch("add");
+                topDisplay.setText(topDisplay.getText()+"+");
+                bottomDisplay.setText("");
             }
-        });*/
-     //   sub = new Button("-");
-        /*sub.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent actionEvent)
-            {
-
+        });
+        sub.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                input.number1Catch(bottomDisplay.getText());
+                input.operandCatch("sub");
+                topDisplay.setText(topDisplay.getText()+"-");
+                bottomDisplay.setText("");
             }
-        });*/
-       // divide = new Button("/");
-        /*divide.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent actionEvent)
-            {
-
+        });
+        div.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                input.number1Catch(bottomDisplay.getText());
+                input.operandCatch("div");
+                topDisplay.setText(topDisplay.getText()+"/");
+                bottomDisplay.setText("");
             }
-        });*/
-        //multiple = new Button("*");
-        /*multiple.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent actionEvent)
-            {
-
+        });
+        mul.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                input.number1Catch(bottomDisplay.getText());
+                input.operandCatch("mul");
+                topDisplay.setText(topDisplay.getText()+"X");
+                bottomDisplay.setText("");
             }
-        });*/
-        //square = new Button("^2");
-        /*square.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent actionEvent)
-            {
-
+        });
+        sqr.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                input.number1Catch(bottomDisplay.getText());
+                input.operandCatch("sqr");
+                topDisplay.setText("");
+                bottomDisplay.setText(input.answerThrower());
             }
-        });*/
-        //squareRoot = new Button("");
-        /*squareRoot.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent actionEvent)
-            {
-
+        });
+        sqrt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                input.number1Catch(bottomDisplay.getText());
+                input.operandCatch("sqrt");
+                topDisplay.setText(topDisplay.getText()+"+");
+                bottomDisplay.setText("");
             }
-        });*/
-        //one = new Button("1");
-        /*one.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent actionEvent)
-            {
-
+        });
+        clr.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                topDisplay.setText("");
+                bottomDisplay.setText("");
             }
-        });*/
-        //zero = new Button("0");
-        /*zero.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent actionEvent)
-            {
-
+        });
+        equ.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                input.number2Catch(bottomDisplay.getText());
+                topDisplay.setText("");
+                bottomDisplay.setText(input.answerThrower());
+                isItEquated = true;
             }
-        });*/
-        //clear = new Button("CL");
-        /*clear.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent actionEvent)
-            {
-
+        });
+        one.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(isItEquated){
+                    topDisplay.setText("");
+                    bottomDisplay.setText("");
+                    isItEquated = false;
+                }
+                topDisplay.setText(topDisplay.getText()+"1");
+                bottomDisplay.setText(bottomDisplay.getText()+"1");
             }
-        });*/
-        //equal = new Button("=");
-        /*equal.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent actionEvent)
-            {
-
+        });
+        zero.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(isItEquated){
+                    topDisplay.setText("");
+                    bottomDisplay.setText("");
+                    isItEquated = false;
+                }
+                topDisplay.setText(topDisplay.getText()+"0");
+                bottomDisplay.setText(bottomDisplay.getText()+"0");
             }
-        });*/
-        //Text = new TextArea();
+        });
 
-       // pane.getChildren().addAll(new Button[]{add, sub, divide, multiple, square, squareRoot, one, zero, clear, equal});
-        //pane.getChildren().add(Text);*/
+    }
 
-        stage.setScene(new Scene(pane, 400, 400));
-        stage.show();
+    private void setupTextDispaly(){
+        topDisplay.setVisible(true);
+        bottomDisplay.setVisible(true);
+        topDisplay.setSize(new Dimension(200,15));
+        bottomDisplay.setSize(new Dimension(200,15));
+        topDisplay.setEditable(false);
+        bottomDisplay.setEditable(false);
+    }
+
+    private void setUpFrame(){
+        frame.setContentPane(mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(200,200));
+        frame.setVisible(true);
+    }
+
+    private void setUpDisplay(){
+        verticalTop.add(topDisplay, BorderLayout.NORTH);
+        verticalTop.add(bottomDisplay,BorderLayout.CENTER);
+        verticalTop.add(horizontalFunctionTop, BorderLayout.SOUTH);
+
+        horizontalFunctionTop.add(sqrt);
+        horizontalFunctionTop.add(sqr);
+        horizontalFunctionTop.add(clr);
+
+        functionSide.add(div);
+        functionSide.add(mul);
+        functionSide.add(sub);
+        functionSide.add(add);
+        functionSide.add(equ);
+
+        numPanelLayout.add(zero);
+        numPanelLayout.add(one);
+
+        mainPanel.add(verticalTop, layout.NORTH);
+        mainPanel.add(functionSide, layout.EAST);
+        mainPanel.add(numPanelLayout,layout.CENTER);
+        mainPanel.setFocusable(true);
+    }
+
+    public CalculatorFace(){
+
+        setUpButtonCompunets();
+        setupTextDispaly();
+        setUpDisplay();
+        setUpFrame();
     }
 
     public static void main(String[] args) {
-        launch(args);
+        SwingUtilities.invokeLater(new Runnable(){
+
+            @Override
+            public void run() {
+                new CalculatorFace();
+            }
+        });
     }
 }

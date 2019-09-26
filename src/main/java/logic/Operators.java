@@ -2,33 +2,33 @@ package logic;
 
 public class Operators {
 
-    public long add(long first, long second){
+    public int add(int first, int second){
         return (first + second);
     }
 
-    public long subtract(long first, long second){
+    public int subtract(int first, int second){
         return (first - second);
     }
 
-    public long divide(long first, long second){
+    public int divide(int first, int second){
         return (first / second);
     }
 
-    public long multiply(long first, long second){
-        return (second * second);
+    public int multiply(int first, int second){
+        return (first * second);
     }
 
-    public long square(long first){
+    public int square(int first){
         if (first < 0)
             first = -first;
-        long result = first;
-        for (long i = 1; i < first; i++){
+        int result = first;
+        for (int i = 1; i < first; i++){
             result += first;
         }
         return (result);
     }
 
-    public double squareRoot(long first){
+    public double squareRoot(int first){
         return (Math.pow(first, .5));
     }
 }
