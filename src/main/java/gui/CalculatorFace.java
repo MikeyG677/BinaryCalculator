@@ -132,32 +132,39 @@ public class CalculatorFace{
     private void setUpFrame(){
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(200,200));
+        frame.setMinimumSize(new Dimension(200,230));
+        frame.setBackground(new Color(32,0,128));
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     private void setUpDisplay(){
-        verticalTop.add(topDisplay, BorderLayout.NORTH);
-        verticalTop.add(bottomDisplay,BorderLayout.CENTER);
-        verticalTop.add(horizontalFunctionTop, BorderLayout.SOUTH);
 
         horizontalFunctionTop.add(sqrt);
         horizontalFunctionTop.add(sqr);
         horizontalFunctionTop.add(clr);
+
+        verticalTop.add(topDisplay, BorderLayout.NORTH);
+        verticalTop.add(bottomDisplay,BorderLayout.CENTER);
+        verticalTop.add(horizontalFunctionTop, BorderLayout.SOUTH);
+        verticalTop.setBackground(mainPanel.getBackground());
 
         functionSide.add(div);
         functionSide.add(mul);
         functionSide.add(sub);
         functionSide.add(add);
         functionSide.add(equ);
+        functionSide.setBackground(mainPanel.getBackground());
 
         numPanelLayout.add(zero);
         numPanelLayout.add(one);
+        numPanelLayout.setBackground(mainPanel.getBackground());
 
         mainPanel.add(verticalTop, layout.NORTH);
         mainPanel.add(functionSide, layout.EAST);
         mainPanel.add(numPanelLayout,layout.CENTER);
         mainPanel.setFocusable(true);
+        mainPanel.setBackground(frame.getBackground());
     }
 
     public CalculatorFace(){
