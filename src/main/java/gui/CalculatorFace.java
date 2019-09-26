@@ -91,6 +91,7 @@ public class CalculatorFace{
                 topDisplay.setText("");
                 bottomDisplay.setText(input.answerThrower());
                 isItEquated = true;
+                frame.repaint();
             }
         });
         one.addActionListener(new ActionListener() {
